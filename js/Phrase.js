@@ -27,5 +27,17 @@ class Phrase {
     }
   }
 
-  //checkLetter () {}
+  checkLetter (letter) {
+    return this.phrase.includes(letter)
+  }
+
+  showMatchedLetter (letter) {
+    const letterList = document.querySelector('#phrase').firstElementChild.children
+
+    for (let i = 0; i < letterList.length; i++) {
+      if (letterList[i].textContent === letter) {
+        letterList[i].classList.replace('hide', 'show')
+      }
+    }
+  }
 }

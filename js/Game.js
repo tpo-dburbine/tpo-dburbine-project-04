@@ -15,8 +15,7 @@ class Game {
   }
 
   getRandomPhrase () {
-    const randomPhrase = Math.floor(Math.random() * this.phrases.length)
-    return this.phrases[randomPhrase]
+    return this.phrases[Math.floor(Math.random() * this.phrases.length)]
   }
 
   startGame () {
@@ -24,5 +23,40 @@ class Game {
     overlayDiv.style.display = 'none'
     this.activePhrase = this.getRandomPhrase()
     this.activePhrase.addPhraseToDisplay()
+  }
+
+  handleInteraction () {}
+
+  checkForWin () {
+    const hiddenLI = document.querySelectorAll('.hide')
+    if (hiddenLI.length === 0) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  removeLife () {
+    const heartElements = document.querySelectorAll('.tries')
+
+    heartElements[this.missed].firstElementChild.hidden = true
+    this.missed++
+    if (this.missed === 5) {
+      this.gameOver('loss')
+    }
+  }
+
+  gameOver (gameWon) {
+    const gameOverString = document.querySelector('#game-over-message')
+    const overlayDiv = document.querySelector('#overlay')
+    overlayDiv.style.display = 'block'
+
+    if (gameWon === 'win') {
+      overlayDiv.className = 'win'
+      gameOverString.textContent = 'Nice job, you won! would you like to play again?'
+    } else if (gameWon === 'loss') {
+      overlayDiv.className = 'lose'
+      gameOverString.textContent = 'Almost! you lost, would you like to try again?'
+    }
   }
 }
