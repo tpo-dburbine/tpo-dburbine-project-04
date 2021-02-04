@@ -8,11 +8,6 @@ class Phrase {
     this.phrase = phrase.toLowerCase()
   }
 
-  /* get phrase () {
-    return this._phrase
-  }
-  */
-
   addPhraseToDisplay () {
     const phraseUL = document.querySelector('#phrase ul')
     for (let i = 0; i < this.phrase.length; i++) {
@@ -28,7 +23,11 @@ class Phrase {
   }
 
   checkLetter (letter) {
-    return this.phrase.includes(letter)
+    if (this.phrase.includes(letter.textContent)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   showMatchedLetter (letter) {

@@ -19,13 +19,38 @@ class Game {
   }
 
   startGame () {
+    for ()
     const overlayDiv = document.querySelector('#overlay')
     overlayDiv.style.display = 'none'
     this.activePhrase = this.getRandomPhrase()
     this.activePhrase.addPhraseToDisplay()
   }
 
-  handleInteraction () {}
+  handleInteraction (button) {
+    const letterKeys = document.querySelectorAll('.key')
+
+    if (this.activePhrase.checkLetter(button)) {
+      for (let i = 0; i < letterKeys.length; i++) {
+        if (button.textContent === letterKeys[i].textContent) {
+          letterKeys[i].disabled = true
+          letterKeys[i].classList.add('chosen')
+        }
+      }
+      this.activePhrase.showMatchedLetter(button.textContent)
+      const win = this.checkForWin()
+      if (win) {
+        this.gameOver('win')
+      }
+    } else {
+      for (let i = 0; i < letterKeys.length; i++) {
+        if (button.textContent === letterKeys[i].textContent) {
+          letterKeys[i].disabled = true
+          letterKeys[i].classList.add('wrong')
+        }
+      }
+      this.removeLife()
+    }
+  }
 
   checkForWin () {
     const hiddenLI = document.querySelectorAll('.hide')
@@ -39,7 +64,7 @@ class Game {
   removeLife () {
     const heartElements = document.querySelectorAll('.tries')
 
-    heartElements[this.missed].firstElementChild.hidden = true
+    heartElements[this.missed].firstElementChild.src = 'images/lostHeart.png'
     this.missed++
     if (this.missed === 5) {
       this.gameOver('loss')
