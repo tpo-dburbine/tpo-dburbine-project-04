@@ -8,6 +8,8 @@ class Phrase {
     this.phrase = phrase.toLowerCase()
   }
 
+  // addPhraseToDisplay method creates li elements based on characters in phrase
+  // sets class based on type of character and appends it to the ul
   addPhraseToDisplay () {
     const phraseUL = document.querySelector('#phrase ul')
     for (let i = 0; i < this.phrase.length; i++) {
@@ -22,6 +24,7 @@ class Phrase {
     }
   }
 
+  // checkLetter returns true if the phrase includes the letter passed
   checkLetter (letter) {
     if (this.phrase.includes(letter.textContent)) {
       return true
@@ -30,6 +33,7 @@ class Phrase {
     }
   }
 
+  // showMatchedLetter shows the letters if the li elements tect content matches the letter passed through
   showMatchedLetter (letter) {
     const letterList = document.querySelector('#phrase').firstElementChild.children
 
